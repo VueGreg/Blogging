@@ -51,14 +51,15 @@
                     <li><a href="#section3">Family</a></li>
                     <li><a href="#section3">Photos</a></li>
                 </ul><br>
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search Blog..">
+                <form class="input-group" action="/search" method="post">
+                    @csrf
+                    <input type="text" name="search" class="form-control" placeholder="Search Blog..">
                     <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
+                    <button class="btn btn-default" type="submit">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                     </span>
-            </div>
+                </form>
         </div>
 
         <div class="col-sm-9" style="background-color: white; padding: 5rem">

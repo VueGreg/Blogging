@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PostsController::class, 'index']);
+Route::post('/search', [PostsController::class, 'search']);
 Route::post('/comment', [CommentsController::class, 'store']);
 Route::delete('/comment/{id}', [CommentsController::class, 'destroy']);
 Route::put('/comment/{id}', [CommentsController::class, 'update']);

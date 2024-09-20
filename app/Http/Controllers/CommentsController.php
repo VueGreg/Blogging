@@ -64,8 +64,8 @@ class CommentsController extends Controller
      */
     public function update(UpdateCommentsRequest $request, $id)
     {
-        dd($request);
         Comments::find($id)->update($request->all());
+        return view('welcome', ['posts' => Posts::with('category', 'user', 'comments')->get()]);    
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Posts;
 use App\Http\Requests\StorePostsRequest;
 use App\Http\Requests\UpdatePostsRequest;
-use App\Models\Comments;
+use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
@@ -63,5 +63,10 @@ class PostsController extends Controller
     public function destroy(Posts $posts)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        return view('welcome', ['posts' => Posts::where('title', 'like', "%$request->search%")->get()]);
     }
 }

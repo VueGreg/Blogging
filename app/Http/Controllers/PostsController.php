@@ -14,7 +14,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('welcome', ['posts' => Posts::with('category', 'user', 'comments')->get()]);
+        // $posts = Posts::with('category', 'user', 'comments', 'tags')->get();
+        // dd($posts);
+        return view('welcome', ['posts' => Posts::with('category', 'user', 'comments', 'tags')->get()]);
     }
 
     /**

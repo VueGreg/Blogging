@@ -69,7 +69,9 @@
                 <hr>
                 <h2>{{ $post->title }}</h2>
                 <h5><span class="glyphicon glyphicon-time"></span> Post by {{ $post->user->name }}, {{ $post->updated_at }}</h5>
-                <h5><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5><br>
+                @foreach ($post->tags as $tag)
+                    <h5><span class="label label-danger">{{ $tag->name }}</span></h5>
+                @endforeach
                 <p>{{ $post->text }}</p>
                 <ul>
                 @foreach ($post->comments as $comment)
@@ -89,8 +91,9 @@
                                         onclick="document.getElementById('commentEdit').value = '{{ $comment->text }}';
                                                 document.getElementById('submit').style.display = 'none';
                                                 document.getElementById('modify').style.display = 'block';
-                                        "
-                                        
+                                                document.getElementById('modify').action = '/comment/{{ $comment->id }}';
+                                                document.getElementById('modifyValue').value = {{ $comment->post_id }};
+                                            "
                                         >
                                         <input type="button" value="Edit" style="background-color: inherit; border: none">
                                     </div>
@@ -115,12 +118,12 @@
                     <button type="submit" class="btn btn-success">Submit</button>
                 </form>
 
-                <form role="form" action="/comment/{{ $comment->id }}" method="post" style="display: none" id="modify">
+                <form role="form" method="post" style="display: none" id="modify">
                     @csrf
                     @method('put')
                     <div class="form-group">
                         <textarea class="form-control" name="comment" id="commentEdit" rows="3" required></textarea>
-                        <input type="hidden" name="post" value="{{ $post->id }}">
+                        <input type="hidden" name="post" id="modifyValue">
                     </div>
                     <button type="submit" class="btn btn-success">Modify</button>
                 </form>
